@@ -1,0 +1,33 @@
+.Layout {
+  width: 82%;
+  //   margin: 5% 2.5% 0 0;
+  margin: 0 6.5% 24% 0;
+  .app-logo {
+    font-size: 1.7rem;
+  }
+  .app-title {
+    display: flex;
+    align-items: flex-end;
+    height: 18%;
+    padding: 0 0 10px 5%;
+  }
+
+  &__preview {
+    width: 100%;
+    height: 85%;
+    padding: 5%;
+    background-color: #479caa;
+    .preview__title {
+      display: inline-block;
+      padding: 0 5px;
+      font-size: 1.5rem;
+      letter-spacing: -1.5px;
+      text-transform: uppercase;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .swiper-container {
+      height: 250px;
+    }
+  }
+}
