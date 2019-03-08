@@ -1,30 +1,104 @@
 import React, { Component } from "react";
 import "./App.scss";
-import { scaleDown as Menu } from "react-burger-menu";
+import { scaleRotate as Menu } from "react-burger-menu";
 import Editor from "./components/Editor";
 import Layout from "./components/Layout";
 class App extends Component {
   state = {
-    menuOpend: false
+    carouselItems: 6,
+    itemsUrls: [],
+    pageTitle: {
+      text: "click menu to edit me!",
+      style: {
+        backgroundColor: "#000",
+        color: "#fff"
+      }
+    },
+    ctaButtons: [
+      {
+        text: "Go now!",
+        backgroundColor: "black",
+        color: "#fff"
+      }
+    ]
   };
-  menuClick() {
-    this.setState({
-      menuOpend: !this.state.menuOpend
-    });
+  fetchImagesData() {
+    fetch("https://jsonplaceholder.typicode.com/photos")
+      .then(response => response.json())
+      .then(data =>
+        this.setState({
+          itemsUrls: [
+            ...data.splice(0, this.state.carouselItems).map(el => el.url)
+          ]
+        })
+      );
   }
+  componentDidMount() {
+    this.fetchImagesData();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.carouselItems !== prevState.carouselItems) {
+      this.fetchImagesData();
+    }
+  }
+
+  handlePreviewChange(newData) {
+    this.setState({ ...newData });
+  }
+
+  addCtaButtons(param) {
+    switch (param) {
+      case "dec":
+        const newArray = [...this.state.ctaButtons];
+        newArray.pop();
+        this.setState(state => {
+          return {
+            ctaButtons: newArray
+          };
+        });
+        break;
+      case "inc":
+        const newArr = [...this.state.ctaButtons];
+        newArr.push({
+          text: "New button",
+          backgroundColor: "",
+          color: "#fff"
+        });
+        this.setState(state => {
+          return {
+            ctaButtons: newArr
+          };
+        });
+        break;
+      default:
+        break;
+    }
+  }
+
   render() {
+    const { pageTitle, carouselItems, itemsUrls, ctaButtons } = this.state;
     return (
       <div className="App" id="App">
-        <Menu pageWrapId={"Layout"} outerContainerId={"App"}>
-          <Editor style={{ color: "blue" }} />
-          {/* <a href="#" className="menu-item">
-            hello
-          </a> */}
+        <Menu
+          menuClassName={"my-class"}
+          width={""}
+          pageWrapId={"Layout"}
+          outerContainerId={"App"}
+        >
+          <Editor
+            pageTitle={pageTitle}
+            carouselItems={carouselItems}
+            ctaButtons={ctaButtons}
+            handlePreviewChange={this.handlePreviewChange.bind(this)}
+            addCtaButtons={this.addCtaButtons.bind(this)}
+          />
         </Menu>
         <Layout
-          isMenuOpend={this.state.menuOpend}
-          menuClicked={this.menuClick.bind(this)}
-          style={{ color: "blue" }}
+          pageTitle={pageTitle}
+          carouselItems={carouselItems}
+          carouselUrls={itemsUrls}
+          ctaButtons={ctaButtons}
         />
       </div>
     );

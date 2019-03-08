@@ -2,6 +2,11 @@
   // display: flex;
   height: 100vh;
 }
+
+.my-class {
+  width: 330px;
+}
+
 .bm-burger-button {
   position: fixed;
   width: 36px;
@@ -37,12 +42,13 @@ Note: Beware of modifying this element as it can break the animations - you shou
 */
 .bm-menu-wrap {
   position: fixed;
+  width: 330px;
   height: 100%;
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: #e3e3e3;
+  background: #607d8b;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }

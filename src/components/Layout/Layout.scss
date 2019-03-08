@@ -1,12 +1,10 @@
 .Layout {
-  background-color: #d5ded9;
+  background-color: #f1f1f1;
   height: 100%;
-  padding: 20% 0;
+  padding: 5rem 0 0;
   text-align: center;
   .app-logo {
     font-size: 1.7rem;
-  }
-  .app-title {
   }
 
   &__preview {
@@ -20,6 +18,28 @@
     }
     .swiper-container {
       height: 250px;
+    }
+    .preview__button {
+      padding: 0.3rem 3.2rem;
+      margin: 30px 0.1rem 0.1rem 0;
+      border: 0.16rem solid rgba(255, 255, 255, 0);
+      border-radius: 2rem;
+      font-family: "Roboto", sans-serif;
+      font-weight: 300;
+      background-color: #f14e4e;
+      color: #ffffff;
+      text-shadow: 0 0.04rem 0.04rem rgba(0, 0, 0, 0.35);
+      text-align: center;
+      transition: all 0.2s;
+      &:hover {
+        border-color: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+  @media all and (min-width: 30rem) {
+    .preview__button {
+      padding: 1rem 6.2rem;
+      font-size: 1.3rem;
     }
   }
 }
